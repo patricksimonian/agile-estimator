@@ -28,7 +28,7 @@ export const Estimator = ({onSubmit = () => null}) => {
           <Field name="classification"
 
             render={({ input, meta }) => (
-                <Select {...input} mt={2}>
+                <Select width={400} {...input} mt={2}>
                   <option value="epic">Epic</option>
                   <option value="task">Task</option>
                 </Select>
@@ -42,7 +42,7 @@ export const Estimator = ({onSubmit = () => null}) => {
           <Field name="unknowns"
 
             render={({ input, meta }) => (
-                <Select {...input} mt={2}>
+                <Select width={400} {...input} mt={2}>
                   <option value="0">No Unknowns</option>
                   <option value="1">Little Unknowns</option>
                   <option value="2">Some Unknowns</option>
@@ -57,7 +57,7 @@ export const Estimator = ({onSubmit = () => null}) => {
                   <Field name="complexity"
 
                   render={({ input, meta }) => (
-                      <Select {...input} mt={2}>
+                      <Select width={400} {...input} mt={2}>
                         <option value="0">Trivial</option>
                         <option value="1">Steps to success are clear</option>
                         <option value="2">Requires some research/planning/consideration</option>

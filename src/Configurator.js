@@ -40,7 +40,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="epic"
 
             render={({ input, meta }) => (
-                <Select {...input} mt={2}>
+                <Select width={400} {...input} mt={2}>
                 {fibNumbs(10)().map(val => <option value={val} key={val}>{val}</option> )}
                   
                 </Select>
@@ -50,7 +50,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="task"
 
             render={({ input, meta }) => (
-                <Select {...input} mt={2}>
+                <Select width={400} {...input} mt={2}>
                 {fibNumbs(5)().map(val => <option value={val} key={val}>{val}</option> )}
                   
                 </Select>
@@ -65,7 +65,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="unknowns"
 
             render={({ input, meta }) => (
-                <Input {...input} mt={2} type="number" min="-1" max="1"/>
+                <Input width={400} {...input} mt={2} type="number" min="-1" max="1"/>
               )}
           />
 
@@ -77,7 +77,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="complexity"
 
             render={({ input, meta }) => (
-                <Input {...input} mt={2} type="number" min="-1" max="1"/>
+                <Input width={400} {...input} mt={2} type="number" min="-1" max="1"/>
               )}
           />
 

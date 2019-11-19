@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
-import {Box, Text, Button} from 'rebass';
+import {Box, Text, Button, Image, Flex} from 'rebass';
 import posed from 'react-pose';
 import { Estimator } from './Estimator';
-
+import robot from './RobotLogo.svg';
 import initialFactors from './config.json';
 import { Configurator } from './Configurator';
-import { circIn } from '@popmotion/easing';
+
 
 const roundToNearestFib = (number ,x=0,y=1) => y < number ? roundToNearestFib(number, y, x+y) : y - number > number - x ? x : y;
+
 const calculateResult = (result, factors = initialFactors) => {
   const classification = result.classification;
   const complexity = result.complexity / 1;
@@ -17,6 +17,7 @@ const calculateResult = (result, factors = initialFactors) => {
   const total = factors.baseFactors[classification] + (factors.complexity * complexity) + (factors.unknowns * unknowns);
   return roundToNearestFib(total);
 }
+
 const PosedBox = posed.div(  {visible: { opacity: 1, applyAtEnd: {display:'block'} },
   hidden: { opacity: 0, applyAtEnd: { display: 'none' } }});
 
@@ -38,8 +39,14 @@ function App() {
 
   return (
     <div className="App">
-      <Box as="header" bg="#288" p={40}>
-        <Text as="h1" color="#444" fontSize={[30, 30, 38, 40]}>Agile Estimator</Text>
+      <Box as="header" bg="#288" p={40} >
+      <Flex alignItems="center">
+
+        <Text as="h1" color="#223993" fontSize={[30, 30, 38, 40]}>Agile-O-Tron
+
+        </Text>
+        <Image src={robot} alt="agile-o-tron" width={75} />
+      </Flex>
       </Box>
       <Box as="main" justifyContent="center" p={[35, 45]}>
         <Box as="article">
