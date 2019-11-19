@@ -16,7 +16,7 @@ export const Estimator = ({onSubmit = () => null}) => {
     initialValues={{
       classification: 'epic',
       unknowns: '0',
-      complexity: '0  '
+      complexity: '0'
     }}
     render={({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>

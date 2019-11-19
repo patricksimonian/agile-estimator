@@ -56,7 +56,7 @@ export const trainingData = [
   {
     "input": [ 1,
        0.25,
-       0
+       0  
     ],
     "output": {
       "points": 0.02

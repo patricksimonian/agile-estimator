@@ -28,31 +28,35 @@ const PosedBox = posed.div(  {visible: { opacity: 1, applyAtEnd: {display:'block
 
 function App() {
   const [estimate, setEstimate] = useState(null);
-  const [botEstimate, setBotEstimate] = useState({points: 0});
+  const [botEstimate, setBotEstimate] = useState(0);
   const [currentConfig, setCurrentConfig] = useState(initialFactors);
   const [classification, setClassification] = useState('');
 
   const handleEstimator = result => {
     const estimate = calculateResult(result, currentConfig)
-    console.log(
-      'calculating result', result, currentConfig
-    )
     setClassification(result.classification);
     setEstimate(estimate);
-
+    
     const brainClass = trainMapping.classification[result.classification];
     const brainComplexity = trainMapping.scale[result.complexity];
     const brainUnknowns = trainMapping.scale[result.unknowns];
     const run = net.run([brainClass, brainComplexity, brainUnknowns]);
-    console.log(run);
-    setBotEstimate(run)
+    
+    console.log(
+      'calculating result', result, currentConfig,
+      'net data', brainClass, brainComplexity, brainUnknowns
+    )
+    setBotEstimate(roundToNearestFib(run.points * 89))
   }
 
   const handleConfigurator = result => {
     setCurrentConfig({...result, baseFactors: {epic: result.epic / 1, task: result.task / 1}});
   }
 
-  const handleClear = () => setEstimate(null);
+  const handleClear = () => {
+    setEstimate(null);
+    setBotEstimate(null);
+  };
 
   return (
     <div className="App">
@@ -102,9 +106,9 @@ function App() {
           <Estimator onSubmit={handleEstimator} />
         </PosedBox>
         <PosedBox pose={estimate !== null ? 'visible' : 'hidden'}>
-          <Box as="article" textAlign="center">
-            <Text as="h2" fontSize={30} textAlign="center">Your {classification} estimate is: <Box as="strong" color="#235aaa">{estimate}</Box></Text>
-            <p>Agile-o-tron thought it should have been estimated {botEstimate.points}</p>
+          <Box as="div" textAlign="center">
+            <Text as="p" fontSize={30} textAlign="center">Your {classification} estimate is: <Box as="strong" color="#235aaa">{estimate}</Box></Text>
+            <Text as="p" fontSize={25}><Image src={robot} alt="agile-o-tron" width={50} /> Agile-o-tron thought it should have been estimated <Box as="strong" color="#22a564 ">{botEstimate}</Box></Text>
             <Button my={10} width={200} onClick={handleClear} bg={"#243a"} color="white">Okay</Button>
           </Box>
         </PosedBox>
