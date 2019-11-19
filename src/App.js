@@ -13,10 +13,10 @@ const calculateResult = (result, factors = initialFactors) => {
   const classification = result.classification;
   const complexity = result.complexity / 1;
   const unknowns = result.unknowns / 1;
-  console.log(complexity, unknowns)
+
   const baseFactor = factors.baseFactors[classification]
   const total = baseFactor + (factors.complexity * complexity * baseFactor) + (factors.unknowns * unknowns * baseFactor);
-  console.log(total)
+
   return roundToNearestFib(total);
 }
 
