@@ -65,7 +65,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="unknowns"
 
             render={({ input, meta }) => (
-                <Input width={400} {...input} mt={2} type="number" min="-1" max="1"/>
+                <Input width={400} {...input} mt={2} type="number" />
               )}
           />
 
@@ -77,7 +77,7 @@ export const Configurator = ({onSubmit = () => null}) => {
           <Field name="complexity"
 
             render={({ input, meta }) => (
-                <Input width={400} {...input} mt={2} type="number" min="-1" max="1"/>
+                <Input width={400} {...input} mt={2} type="number" />
               )}
           />
 
