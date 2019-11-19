@@ -52,6 +52,7 @@ function App() {
       </Flex>
       </Box>
       <Box as="main" justifyContent="center" p={[35, 45]}>
+      <Text as="h2">Points Estimator</Text>
         <Box as="article">
 
         <Text as="h3" mb={20}>Unknowns:</Text>
