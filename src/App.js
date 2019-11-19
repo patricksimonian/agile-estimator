@@ -13,8 +13,10 @@ const calculateResult = (result, factors = initialFactors) => {
   const classification = result.classification;
   const complexity = result.complexity / 1;
   const unknowns = result.unknowns / 1;
-
-  const total = factors.baseFactors[classification] + (factors.complexity * complexity) + (factors.unknowns * unknowns);
+  console.log(complexity, unknowns)
+  const baseFactor = factors.baseFactors[classification]
+  const total = baseFactor + (factors.complexity * complexity * baseFactor) + (factors.unknowns * unknowns * baseFactor);
+  console.log(total)
   return roundToNearestFib(total);
 }
 
@@ -25,6 +27,7 @@ function App() {
   const [estimate, setEstimate] = useState(null);
   const [currentConfig, setCurrentConfig] = useState(initialFactors);
   const [classification, setClassification] = useState('');
+
   const handleEstimator = result => {
     const estimate = calculateResult(result, currentConfig)
     setClassification(result.classification);
