@@ -5,6 +5,8 @@ import { Estimator } from './Estimator';
 import robot from './RobotLogo.svg';
 import initialFactors from './config.json';
 import { Configurator } from './Configurator';
+import net from './brain';
+import { trainMapping } from './trainingData';
 
 
 const roundToNearestFib = (number ,x=0,y=1) => y < number ? roundToNearestFib(number, y, x+y) : y - number > number - x ? x : y;
@@ -12,12 +14,13 @@ const roundToNearestFib = (number ,x=0,y=1) => y < number ? roundToNearestFib(nu
 const calculateResult = (result, factors = initialFactors) => {
   const classification = result.classification;
   const complexity = result.complexity / 1;
+  console.log(result.complexity)
   const unknowns = result.unknowns / 1;
   console.log(complexity, unknowns)
   const baseFactor = factors.baseFactors[classification]
-  const total = baseFactor + (factors.complexity * complexity * baseFactor) + (factors.unknowns * unknowns * baseFactor);
+  const total = baseFactor + (factors.complexity * complexity * (complexity > 0 ? baseFactor : 1)) + (factors.unknowns * unknowns * (complexity > 0 ? baseFactor : 1));
   console.log(total)
-  return roundToNearestFib(total);
+  return total <= 1 ? 1 : roundToNearestFib(total);
 }
 
 const PosedBox = posed.div(  {visible: { opacity: 1, applyAtEnd: {display:'block'} },
@@ -25,6 +28,7 @@ const PosedBox = posed.div(  {visible: { opacity: 1, applyAtEnd: {display:'block
 
 function App() {
   const [estimate, setEstimate] = useState(null);
+  const [botEstimate, setBotEstimate] = useState({points: 0});
   const [currentConfig, setCurrentConfig] = useState(initialFactors);
   const [classification, setClassification] = useState('');
 
@@ -35,6 +39,13 @@ function App() {
     )
     setClassification(result.classification);
     setEstimate(estimate);
+
+    const brainClass = trainMapping.classification[result.classification];
+    const brainComplexity = trainMapping.scale[result.complexity];
+    const brainUnknowns = trainMapping.scale[result.unknowns];
+    const run = net.run([brainClass, brainComplexity, brainUnknowns]);
+    console.log(run);
+    setBotEstimate(run)
   }
 
   const handleConfigurator = result => {
@@ -93,6 +104,7 @@ function App() {
         <PosedBox pose={estimate !== null ? 'visible' : 'hidden'}>
           <Box as="article" textAlign="center">
             <Text as="h2" fontSize={30} textAlign="center">Your {classification} estimate is: <Box as="strong" color="#235aaa">{estimate}</Box></Text>
+            <p>Agile-o-tron thought it should have been estimated {botEstimate.points}</p>
             <Button my={10} width={200} onClick={handleClear} bg={"#243a"} color="white">Okay</Button>
           </Box>
         </PosedBox>

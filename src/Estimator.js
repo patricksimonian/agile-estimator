@@ -16,7 +16,7 @@ export const Estimator = ({onSubmit = () => null}) => {
     initialValues={{
       classification: 'epic',
       unknowns: '0',
-      complexity: '0'
+      complexity: '0  '
     }}
     render={({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
@@ -43,10 +43,10 @@ export const Estimator = ({onSubmit = () => null}) => {
 
             render={({ input, meta }) => (
                 <Select width={400} {...input} mt={2}>
-                  <option value="0">No Unknowns</option>
-                  <option value="1">Little Unknowns</option>
-                  <option value="2">Some Unknowns</option>
-                  <option value="3">Many Unknowns</option>
+                  <option value="-1">No Unknowns</option>
+                  <option value="0">Little Unknowns</option>
+                  <option value="1">Some Unknowns</option>
+                  <option value="2">Many Unknowns</option>
                 </Select>
               )}
           />
@@ -58,11 +58,11 @@ export const Estimator = ({onSubmit = () => null}) => {
 
                   render={({ input, meta }) => (
                       <Select width={400} {...input} mt={2}>
-                        <option value="0">Trivial</option>
-                        <option value="1">Steps to success are clear</option>
-                        <option value="2">Requires some research/planning/consideration</option>
-                        <option value="3">Complicated but possible</option>
-                        <option value="4">Complex</option>
+                        <option value="-1">Trivial</option>
+                        <option value="0">Steps to success are clear</option>
+                        <option value="1">Requires some research/planning/consideration</option>
+                        <option value="2">Complicated but possible</option>
+                        <option value="3">Complex</option>
                       </Select>
                     )}
                   />
